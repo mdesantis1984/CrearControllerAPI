@@ -1,0 +1,86 @@
+﻿namespace ::{namespace}::.Data.Services
+{
+    using Microsoft.EntityFrameworkCore;
+    using ::{namespace}::.Data.Models;
+    using ::{namespace}::.Data.Context;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    public class Services::{nombreModelo}::
+    {
+        private readonly ::{nombreContexto}:: _context;
+
+        public Services::{nombreModelo}::(::{nombreContexto}:: context)
+        {
+            _context = context;
+        }
+        public async Task<List<::{nombreModelo}::>> GetUsuarioAsync()
+        {
+            return await _context.::{nombreModelo}::.ToListAsync();
+        }
+        public async Task<::{nombreModelo}::> GetUsuarioAsync(long id)
+        {
+            var entidad = await _context.::{nombreModelo}::.FindAsync(id);
+
+            if (entidad == null)
+            {
+                return null;
+            }
+
+            return entidad;
+        }
+        public async Task<bool> PutUsuariosAsync(long id, ::{nombreModelo}:: entidad)
+        {
+            if (id != entidad.::{nombrePrimaryKey}::)
+            {
+                return false;
+            }
+
+            _context.Entry(entidad).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuariosExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+        public async Task<::{nombreModelo}::> PostUsuariosAsync(::{nombreModelo}:: entidad)
+        {
+            _context.::{nombreModelo}::.Add(entidad);
+            await _context.SaveChangesAsync();
+
+            return entidad;
+        }
+        public async Task<bool> DeleteUsuariosAsync(long id)
+        {
+            var entidad = await _context.::{nombreModelo}::.FindAsync(id);
+            if (entidad == null)
+            {
+                return false;
+            }
+
+            _context.::{nombreModelo}::.Remove(entidad);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        private bool UsuariosExists(long id)
+        {
+            return _context.::{nombreModelo}::.Any(e => e.::{nombrePrimaryKey}:: == id);
+        }
+    }
+}
