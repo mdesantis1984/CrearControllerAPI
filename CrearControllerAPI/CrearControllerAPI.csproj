@@ -59,6 +59,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Readme.md" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
