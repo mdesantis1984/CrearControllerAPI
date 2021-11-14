@@ -20,14 +20,22 @@ namespace CrearControllerAPI.Tools.CrearCRUD
         {
             Helper helper = new Helper(_serviceProvider);
 
-            if (!string.IsNullOrEmpty(txtNombreContexto.Text) && !string.IsNullOrEmpty(txtNombreModelo.Text) && !string.IsNullOrEmpty(txtPrimaryKey.Text))
+            if (!string.IsNullOrEmpty(cbxContexto.SelectedItem.ToString()) && !string.IsNullOrEmpty(cbxModelo.SelectedItem.ToString()) && !string.IsNullOrEmpty(txtPrimaryKey.Text))
             {
-                helper.GenerarCRUD(txtNombreContexto.Text, txtNombreModelo.Text, txtPrimaryKey.Text);
+                helper.GenerarCRUD(cbxContexto.SelectedItem.ToString(), cbxModelo.SelectedItem.ToString(), txtPrimaryKey.Text);
             }
             else
             {
                 helper.Msg("Todos los campos son requeridos");
             }
+        }
+
+        private void btoLoadCombos_Click(object sender, RoutedEventArgs e)
+        {
+            Helper helper = new Helper(_serviceProvider);
+
+            helper.PopularCombos(cbxContexto, cbxModelo);
+
         }
     }
 }

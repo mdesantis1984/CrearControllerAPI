@@ -6,31 +6,33 @@
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
              Background="Black"
              Foreground="White"
-             mc:Ignorable="d"
-             d:DesignHeight="78.451" d:DesignWidth="1144.001"
-             Name="CreaCRUDAPI">
+             mc:Ignorable="d" d:DesignWidth="1144.001"
+             Name="CreaCRUDAPI" Height="70">
     <UserControl.Resources>
         <BitmapImage x:Key="ImageSourceMarco" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\Proyectos\ThisCloudServices\02-ExtensionesVisualEstudio\CrearControllerAPI\CrearControllerAPI\Tools\CrearCRUD\mdesantis_foto_perfil.fw.png"/>
     </UserControl.Resources>
 
     <Grid>
-        <Grid Margin="500,13,0,0"  HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="540">
-            <Button Content="Crear" x:Name="btoCrearCRUD" Margin="10,21,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74" Click="btoCrearCRUD_Click"/>
-            <TextBlock x:Name="lblHelper" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Foreground="White" Height="56" Width="358" Margin="99,0,0,0" TextAlignment="Justify" TextOptions.TextHintingMode="Animated" TextTrimming="WordEllipsis" TextWrapping="WrapWithOverflow" 
+        <Grid Margin="573,10,0,0"  HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="392">
+
+            <TextBlock x:Name="lblHelper" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Black" Foreground="White" Height="56" Width="358" Margin="10,0,0,0" TextAlignment="Justify" TextOptions.TextHintingMode="Animated" TextTrimming="WordEllipsis" TextWrapping="WrapWithOverflow" 
                        ><Run Text="Recordar que para registrar el servicio en  Startup.cs es necesario agregar"/><Span Foreground="Yellow" FontSize="13" FontFamily="Consolas"><Run Text=" //##Services##"/></Span><Run Text=" en la linea que quiere usted que queden los servicios "/></TextBlock>
         </Grid>
 
         <Grid Margin="9,8,0,0"  HorizontalAlignment="Left" Width="159" Height="56" VerticalAlignment="Top">
             <Label x:Name="lblNombreContexto" Content="Nombre del Contexto" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Foreground="White" Height="28" Width="139" Margin="10,0,0,0"/>
-            <TextBox x:Name="txtNombreContexto" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="22" Width="139" Background="#FF444444" Margin="10,27,0,7" Foreground="White"/>
+            <ComboBox x:Name="cbxContexto" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top" Width="139"/>
         </Grid>
         <Grid Margin="173,8,0,0"  HorizontalAlignment="Left" Width="159" Height="56" VerticalAlignment="Top">
             <Label x:Name="lblNombreModelo" Content="Nombre del Modelo" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Foreground="White" Height="28" Width="139" Margin="10,0,0,0"/>
-            <TextBox x:Name="txtNombreModelo" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="22" Width="139" Background="#FF444444" Margin="10,27,0,7" Foreground="White"/>
+            <ComboBox x:Name="cbxModelo" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top" Width="139"/>
         </Grid>
         <Grid Margin="337,8,0,0"  HorizontalAlignment="Left" Width="159" Height="56" VerticalAlignment="Top">
             <Label x:Name="lblPrimaryKey" Content="Nombre Primary Key" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" Foreground="White" Height="28" Width="139" Margin="10,0,0,0"/>
-            <TextBox x:Name="txtPrimaryKey" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="22" Width="139" Background="#FF444444" Margin="10,27,0,7" Foreground="White"/>
+            <TextBox x:Name="txtPrimaryKey" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="139" Background="#FF444444" Margin="0,28,0,0" Foreground="White"/>
         </Grid>
+
+        <Button x:Name="btoLoadCombos" Content="Cargar" HorizontalAlignment="Left" Margin="501,7,0,0" VerticalAlignment="Top" Height="22" Width="67" Click="btoLoadCombos_Click"/>
+        <Button Content="Crear" x:Name="btoCrearCRUD" Margin="501,34,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="67" Click="btoCrearCRUD_Click"/>
     </Grid>
 </UserControl>

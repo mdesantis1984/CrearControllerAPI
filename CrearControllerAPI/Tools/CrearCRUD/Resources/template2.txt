@@ -1,0 +1,106 @@
+﻿namespace ::{namespace}::.Data.Services
+{
+    using Microsoft.EntityFrameworkCore;
+    using ::{namespace}::.Data.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using ::{namespace}::.Data.Interface;
+
+    public class Services::{nombreModelo}::
+    {
+        readonly IServiceScopeFactory<::{nombreContexto}::> _dbCtxFactory;
+        
+
+        public Services::{nombreModelo}::(IServiceScopeFactory<::{nombreContexto}::> dbCtxFactory)
+        {
+             _dbCtxFactory = dbCtxFactory;
+        }
+
+        public async Task<List<::{nombreModelo}::>> Get::{nombreModelo}::Async()
+        {
+            using var scope = _dbCtxFactory.CreateScope();
+            var db = scope.GetRequiredService();
+
+            return await db.::{nombreModelo}::.AsNoTracking().ToListAsync();
+        }
+        public async Task<::{nombreModelo}::> Get::{nombreModelo}::Async(long id)
+        {
+            using var scope = _dbCtxFactory.CreateScope();
+            var db = scope.GetRequiredService();
+
+            var entidad = await db.::{nombreModelo}::.AsNoTracking().Where(x => x.::{nombrePrimaryKey}:: == id).ToListAsync();
+
+            if (entidad == null)
+            {
+                return null;
+            }
+
+            return entidad;
+        }
+        public async Task<bool> Put::{nombreModelo}::Async(long id, ::{nombreModelo}:: entidad)
+        {
+            using var scope = _dbCtxFactory.CreateScope();
+            var db = scope.GetRequiredService();
+
+            if (id != entidad.::{nombrePrimaryKey}::)
+            {
+                return false;
+            }
+
+            db.Entry(entidad).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!::{nombreModelo}::Exists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+        public async Task<::{nombreModelo}::> Post::{nombreModelo}::Async(::{nombreModelo}:: entidad)
+        {
+            using var scope = _dbCtxFactory.CreateScope();
+            var db = scope.GetRequiredService();
+
+            db.::{nombreModelo}::.Add(entidad);
+            await db.SaveChangesAsync();
+
+            return entidad;
+        }
+        public async Task<bool> Delete::{nombreModelo}::Async(long id)
+        {
+            using var scope = _dbCtxFactory.CreateScope();
+            var db = scope.GetRequiredService();
+
+            var entidad = await db.::{nombreModelo}::.AsNoTracking().Where(x => x.::{nombrePrimaryKey}:: == id).ToListAsync();
+            if (entidad == null)
+            {
+                return false;
+            }
+
+            db.::{nombreModelo}::.Remove(entidad);
+            await db.SaveChangesAsync();
+
+            return true;
+        }
+        private bool ::{nombreModelo}::Exists(long id)
+        {
+            using var scope = _dbCtxFactory.CreateScope();
+            var db = scope.GetRequiredService();
+
+            return db.::{nombreModelo}::.AsNoTracking().Any(e => e.::{nombrePrimaryKey}:: == id);
+        }
+    }
+}
