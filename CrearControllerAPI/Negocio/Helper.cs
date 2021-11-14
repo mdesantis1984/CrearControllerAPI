@@ -11,13 +11,11 @@ namespace CrearControllerAPI.Negocio
     using System.IO;
     using System.IO.Packaging;
     using System.Text;
-    using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Controls;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
     using System.Reflection;
-    using System.Text.RegularExpressions;
 
     public class Helper
     {
@@ -343,7 +341,7 @@ namespace CrearControllerAPI.Negocio
 
         public Project GetProject(object selectedItemObject)
         {
-            var project = selectedItemObject as Project;
+            Project project = selectedItemObject as Project;
             if (project != null)
                 return project;
 
